@@ -5,20 +5,20 @@ const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
 const loader = document.getElementById("loader");
 
-function showLoadingSpinner() {
+const showLoadingSpinner = () => {
   loader.hidden = false;
   quoteContainer.hidden = true;
-}
+};
 
-function removeLoadingSpinner() {
+const removeLoadingSpinner = () => {
   if (!loader.hidden) {
     quoteContainer.hidden = false;
     loader.hidden = true;
   }
-}
+};
 
 // Get Quote From API
-async function getQuote() {
+const getQuote = async () => {
   showLoadingSpinner();
   // We need to use a Proxy URL to make our API call in order to avoid a CORS error
   const proxyUrl = "https://jacinto-cors-proxy.herokuapp.com/";
@@ -46,15 +46,15 @@ async function getQuote() {
   } catch (error) {
     getQuote();
   }
-}
+};
 
 // Tweet Quote
-function tweetQuote() {
+const tweetQuote = () => {
   const quote = quoteText.innerText;
   const author = authorText.innerText;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${quote} - ${author}`;
   window.open(twitterUrl, "_blank");
-}
+};
 
 // Event Listeners
 newQuoteBtn.addEventListener("click", getQuote);
